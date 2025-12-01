@@ -183,7 +183,7 @@ namespace eosio {
    class address_manager {
    private:
       mutable std::mutex addresses_mutex;
-      std::unordered_map<std::string, peer_address> addresses;
+      std::vector<peer_address> addresses;
    public:
       explicit address_manager() {};
 
@@ -209,7 +209,7 @@ namespace eosio {
 
       std::unordered_set<std::string> get_addresses() const;
 
-      std::unordered_map<std::string, peer_address> get_addresses_map() const;
+      std::vector<peer_address> get_addresses_map() const;
 
       std::unordered_set<std::string> get_manual_addresses() const;
 
