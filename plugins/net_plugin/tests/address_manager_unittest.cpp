@@ -251,13 +251,11 @@ BOOST_AUTO_TEST_SUITE(test_address_manager)
       BOOST_REQUIRE(retrieved_addresses.count("example.com:443:trx") == 1);
       BOOST_REQUIRE(retrieved_addresses.count("192.168.0.1:9877:peer") == 1);
       BOOST_REQUIRE(retrieved_addresses.count("example.com:444") == 1);
-      /*
-      BOOST_REQUIRE(manager.get_addresses_map()["192.168.0.1:9876"].manual == false);
-      BOOST_REQUIRE(manager.get_addresses_map()["10.0.0.2:8888"].manual == false);
-      BOOST_REQUIRE(manager.get_addresses_map()["example.com:443"].manual == false);
-      BOOST_REQUIRE(manager.get_addresses_map()["192.168.0.1:9877"].manual == true);
-      BOOST_REQUIRE(manager.get_addresses_map()["example.com:444"].manual == true);
-      */
+      BOOST_REQUIRE(manager.get_addresses_map("192.168.0.1:9876").manual == false);
+      BOOST_REQUIRE(manager.get_addresses_map("10.0.0.2:8888").manual == false);
+      BOOST_REQUIRE(manager.get_addresses_map("example.com:443").manual == false);
+      BOOST_REQUIRE(manager.get_addresses_map("192.168.0.1:9877").manual == true);
+      BOOST_REQUIRE(manager.get_addresses_map("example.com:444").manual == true);
    }
 
    BOOST_AUTO_TEST_CASE(test_update_address) {
@@ -272,12 +270,10 @@ BOOST_AUTO_TEST_SUITE(test_address_manager)
       manager.add_address(address);
 
       BOOST_REQUIRE(manager.get_addresses().size() == 1);
-      /*
-      BOOST_REQUIRE(manager.get_addresses_map()["127.0.0.1:9876"].address_type == address_type_enum::trx);
-      BOOST_REQUIRE(manager.get_addresses_map()["127.0.0.1:9876"].receive == time1);
-      BOOST_REQUIRE(manager.get_addresses_map()["127.0.0.1:9876"].last_active == time1);
-      BOOST_REQUIRE(manager.get_addresses_map()["127.0.0.1:9876"].manual == true);
-      */
+      BOOST_REQUIRE(manager.get_addresses_map("127.0.0.1:9876").address_type == address_type_enum::trx);
+      BOOST_REQUIRE(manager.get_addresses_map("127.0.0.1:9876").receive == time1);
+      BOOST_REQUIRE(manager.get_addresses_map("127.0.0.1:9876").last_active == time1);
+      BOOST_REQUIRE(manager.get_addresses_map("127.0.0.1:9876").manual == true);
 
       peer_address new_address = peer_address::from_str("127.0.0.1:9876:peer");
       std::this_thread::sleep_for(std::chrono::milliseconds(1000));
@@ -289,12 +285,10 @@ BOOST_AUTO_TEST_SUITE(test_address_manager)
       manager.update_address(new_address);
 
       BOOST_REQUIRE(manager.get_addresses().size() == 1);
-      /*
-      BOOST_REQUIRE(manager.get_addresses_map()["127.0.0.1:9876"].address_type == address_type_enum::peer);
-      BOOST_REQUIRE(manager.get_addresses_map()["127.0.0.1:9876"].receive == time2);
-      BOOST_REQUIRE(manager.get_addresses_map()["127.0.0.1:9876"].last_active == time2);
-      BOOST_REQUIRE(manager.get_addresses_map()["127.0.0.1:9876"].manual == false);
-      */
+      BOOST_REQUIRE(manager.get_addresses_map("127.0.0.1:9876").address_type == address_type_enum::peer);
+      BOOST_REQUIRE(manager.get_addresses_map("127.0.0.1:9876").receive == time2);
+      BOOST_REQUIRE(manager.get_addresses_map("127.0.0.1:9876").last_active == time2);
+      BOOST_REQUIRE(manager.get_addresses_map("127.0.0.1:9876").manual == false);
 
    }
 

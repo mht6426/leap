@@ -101,8 +101,14 @@ namespace eosio {
       return result;
    }
 
-   std::vector <peer_address> address_manager::get_addresses_map() const {
-      return addresses;
+   peer_address address_manager::get_addresses_map(const std::string &address) const {
+      std::lock_guard<std::mutex> lock(addresses_mutex);
+      peer_address pa = peer_address::from_str(address);
+      auto it = std::find(addresses.begin(), addresses.end(), pa);
+      if (it != addresses.end()) {
+         return *it;
+      }
+      return peer_address();
    }
 
    std::unordered_set <std::string> address_manager::get_manual_addresses() const {

@@ -209,7 +209,7 @@ namespace eosio {
 
       std::unordered_set<std::string> get_addresses() const;
 
-      std::vector<peer_address> get_addresses_map() const;
+      peer_address get_addresses_map(const std::string &address) const;
 
       std::unordered_set<std::string> get_manual_addresses() const;
 
